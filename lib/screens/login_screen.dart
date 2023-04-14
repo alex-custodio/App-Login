@@ -3,9 +3,15 @@ import 'package:applogin/components/components.dart';
 import '../constants.dart';
 import '../widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool value = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,16 +46,15 @@ class LoginScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                socialIcon(img: "assets/images/facebook.png"),
+                                SocialLoginIcon(img: "assets/images/facebook.png"),
                                 SizedBox(width: 10),
-                                socialIcon(img: "assets/images/google.png")
+                                SocialLoginIcon(img: "assets/images/google.png")
                               ],
                             ),
                           ),
                           SizedBox(height: 10),
                           Text("Ou use sua conta de e-mail"),
                           SizedBox(height: 10),
-                          // Como que eu mudo o tamanho do TextField?
                           FormTextField(
                               icon: Icons.email,
                               labelText: "E-mail",
@@ -60,11 +65,16 @@ class LoginScreen extends StatelessWidget {
                           Container(
                               width: size.width / 1.2,
                               child: SwitchListTile(
-                                
+                                activeColor: kPrimaryColor,
                                 title: Text("Lembrar de mim", style: TextStyle(color: Colors.black.withOpacity(0.80)),),
-                                value: true,
-                                onChanged: null,
-                              )),
+                                value: value,
+                                onChanged: (valueChanged){
+                                  setState(() {
+                                    value = valueChanged;
+                                  });
+                                },
+                                ),
+                              ),
                           SizedBox(height: 8),
                           Container(
                             width: size.width / 1.2,
@@ -111,29 +121,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget socialIcon({img}) {
-  return Container(
-    width: 50,
-    height: 50,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          offset: Offset(0, 10),
-          blurRadius: 10,
-          color: Colors.black.withOpacity(0.18),
-        ),
-      ],
-    ),
-    child: MaterialButton(
-      child: Image.asset(
-        img,
-        alignment: Alignment.center,
-      ),
-      onPressed: () {},
-    ),
-  );
 }
