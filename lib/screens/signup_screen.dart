@@ -1,17 +1,17 @@
-import 'package:applogin/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:applogin/components/components.dart';
 import '../constants.dart';
 import '../widgets/widgets.dart';
+import 'screens.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   bool value = false;
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child: Stack(
               children: [
-                const Upside(img: "assets/images/page-flat.png"),
-                const PageTitleBar(title: "Seja bem vindo!"),
+                const Upside(img: "assets/images/landing-page-mono.png"),
+                const PageTitleBar(title: "Cadastre-se!"),
                 Padding(
                   padding: const EdgeInsets.only(top: 330),
                   child: Container(
@@ -42,41 +42,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: size.width / 1.2,
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SocialLoginIcon(img: "assets/images/facebook.png"),
-                                SizedBox(width: 10),
-                                SocialLoginIcon(img: "assets/images/google.png")
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text("Ou use sua conta de e-mail"),
                           SizedBox(height: 10),
                           FormTextField(
                               icon: Icons.email,
                               labelText: "E-mail",
-                              size: size,
-                              keyboardType: TextInputType.emailAddress),
+                              size: size, keyboardType: TextInputType.emailAddress,),
+                          SizedBox(height: 10),
+                          FormTextField(size: size, icon: Icons.person, labelText: "Nome", keyboardType: TextInputType.name,),
+                          SizedBox(height: 10),
+                          FormTextField(size: size, icon: Icons.phone, labelText: "Telefone", keyboardType: TextInputType.phone,),
                           SizedBox(height: 10),
                           FormPasswordField(size: size),
-                          SizedBox(height: 8),
-                          Container(
-                              width: size.width / 1.2,
-                              child: SwitchListTile(
-                                activeColor: kPrimaryColor,
-                                title: Text("Lembrar de mim", style: TextStyle(color: Colors.black.withOpacity(0.80)),),
-                                value: value,
-                                onChanged: (valueChanged){
-                                  setState(() {
-                                    value = valueChanged;
-                                  });
-                                },
-                                ),
-                              ),
                           SizedBox(height: 8),
                           Container(
                             width: size.width / 1.2,
@@ -87,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             child: MaterialButton(
                               child: Text(
-                                "LOGIN",
+                                "CADASTRAR",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -99,16 +75,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(height: 10),
                           Row(mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Não tem uma conta?"),
+                              Text("Já tem uma conta?"),
                               TextButton(
                                 child: Text(
-                                  "Cadastre-se",
+                                  "Login",
                                   style: TextStyle(
                                     color: kPrimaryColor,
                                   ),
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignupScreen()));
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
                                 },
                               ),
                             ],

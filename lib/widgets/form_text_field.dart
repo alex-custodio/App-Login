@@ -4,12 +4,14 @@ import 'package:applogin/constants.dart';
 class FormTextField extends StatelessWidget {
   IconData icon;
   String labelText;
+  TextInputType? keyboardType;
   Size size;
   FormTextField({
     Key? key,
     required this.size,
     required this.icon,
     required this.labelText,
+    required this.keyboardType
   }) : super(key: key);
 
 
@@ -22,6 +24,7 @@ class FormTextField extends StatelessWidget {
       ),
       width: size.width / 1.2,
       child: TextField(
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: TextStyle(color: kPrimaryColor.withOpacity(0.78)),
